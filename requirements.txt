@@ -1,6 +1,2 @@
 numpy
-pandas
-keras
-sklearn
-tensorflow
 overrides
