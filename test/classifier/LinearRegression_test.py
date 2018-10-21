@@ -6,8 +6,9 @@ from MasterOfOptimizers.dataloader.BaseDataloader import BaseDataloader
 
 class TestLinearRegression(BaseTestCase):
     def setUp(self):
-        self.dataloader = BaseDataloader(
-            file_path=""
+        self.trainDataloader = BaseDataloader(
+            file_path="",
+            batch_size=5
         )
         optimizer = MiniBatchGD(
             batch_size=1
@@ -18,5 +19,6 @@ class TestLinearRegression(BaseTestCase):
         raise NotImplementedError
 
     def test_training(self):
-        self.model.train(self.dataloader.train_set)
+        self.model.train(self.trainDataloader.data)
+        self.model.analyze()
         raise NotImplementedError

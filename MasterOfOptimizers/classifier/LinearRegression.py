@@ -10,7 +10,7 @@ class LinearRegression(BaseClassifier):
         self.loss = None
 
     @overrides
-    def train(self, train_set):
+    def train(self, dataloader):
         # use self.optimizer to update self.loss
         raise NotImplementedError
 

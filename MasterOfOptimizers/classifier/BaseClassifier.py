@@ -2,7 +2,7 @@ class BaseClassifier:
     def __init__(self):
         raise NotImplementedError
 
-    def train(self, train_set):
+    def train(self, dataloader):
         raise NotImplementedError
 
     def analyze(self):
