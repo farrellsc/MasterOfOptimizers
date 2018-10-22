@@ -7,7 +7,7 @@ from MasterOfOptimizers.dataloader.BaseDataloader import BaseDataloader
 class TestLinearRegression(BaseTestCase):
     def setUp(self):
         self.trainDataloader = BaseDataloader(
-            file_path="/media/zzhuang/00091EA2000FB1D0/iGit/git_projects/MasterOfOptimizers/data/fake1",
+            file_path="../../data/fake1",
             batch_size=5
         )
         self.model = LogisticRegression(
