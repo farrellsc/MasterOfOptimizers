@@ -1,6 +1,6 @@
 from MasterOfOptimizers.classifier.BaseClassifier import BaseClassifier
 from MasterOfOptimizers.optimizer.BaseOptimizer import BaseOptimizer
-from MasterOfOptimizers.util.func import sigmoid, mse
+from MasterOfOptimizers.util.func import sigmoid, cross_entropy
 from overrides import overrides
 import matplotlib.pyplot as plt
 import numpy as np
@@ -8,7 +8,6 @@ import numpy as np
 
 class LogisticRegression(BaseClassifier):
     def __init__(self, optimizer: BaseOptimizer, num_iter, verbose=False, lr=0.01):
-        super(LogisticRegression, self).__init__()
         self.optimizer = optimizer
         self.loss = None
         self.num_iter = num_iter
@@ -16,6 +15,7 @@ class LogisticRegression(BaseClassifier):
         self.verbose = verbose
         self.W = None
         self.plt_path = "/".join(__file__.split("/")[:-3]) + "/plot/"
+        self.loss_history = []
 
     @overrides
     def train(self, dataloader):
@@ -23,21 +23,27 @@ class LogisticRegression(BaseClassifier):
         for i in range(self.num_iter):
             if i % 10 == 0:
                 print("iter %d" % i)
+            preds = None
+            ys = None
             for batch_ind, (X, y) in enumerate(dataloader):
                 X = np.concatenate((np.ones([X.shape[0], 1]), X), axis=1)
                 pred = sigmoid(np.dot(X, self.W)).reshape(y.shape)
+                if preds is None:
+                    preds = pred.copy()
+                else:
+                    preds = np.vstack([preds, pred])
+                if ys is None:
+                    ys = y.copy()
+                else:
+                    ys = np.vstack([ys, y])
                 gradient = np.dot(X.T, pred - y) / y.size
 
                 self.W -= self.optimizer.step(gradient)
-
-                if self.verbose is True and batch_ind % 100 == 0:
-                    pred = sigmoid(np.dot(X, self.W))
-                    print(f'loss: {mse(pred, y)} \t')
+            self.loss_history.append(cross_entropy(preds, ys))
 
     @overrides
-    def analyze(self):
-        # do analysis based on self.loss, call self.plot to plot train_loss
-        raise NotImplementedError
+    def get_loss_history(self):
+        return self.loss_history
 
     def plot(self, dataloader, plt_path):
         x = np.linspace(dataloader.data[:, 0].min(), dataloader.data[:, 0].max(), 50)
@@ -46,6 +52,8 @@ class LogisticRegression(BaseClassifier):
         plt.plot(x, y)
         data1 = dataloader.data[dataloader.label[:, 0] == 0]
         data2 = dataloader.data[dataloader.label[:, 0] == 1]
+        plt.ylim(int(min(data1[:, 0].min(), data2[:, 0].min()))-1, int(max(data1[:, 0].max(), data2[:, 0].max()))+1)
+        plt.ylim(int(min(data1[:, 1].min(), data2[:, 1].min()))-1, int(max(data1[:, 1].max(), data2[:, 1].max()))+1)
         plt.scatter(data1[:, 0], data1[:, 1], color='r')
         plt.scatter(data2[:, 0], data2[:, 1], color='b')
         plt.savefig(plt_path)

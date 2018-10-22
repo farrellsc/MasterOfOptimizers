@@ -19,9 +19,9 @@ def main():
     test_sample_num = 200
     data_name = "fake1"
     data1 = np.random.multivariate_normal([2, 2], [[1, 0], [0, 4]], [train_sample_num])
-    data2 = np.random.multivariate_normal([6, 7], [[2, 2], [1, 3]], [train_sample_num])
+    data2 = np.random.multivariate_normal([7, 8], [[2, 2], [1, 3]], [train_sample_num])
     data3 = np.random.multivariate_normal([2, 2], [[1, 0], [0, 4]], [test_sample_num])
-    data4 = np.random.multivariate_normal([6, 7], [[2, 2], [1, 3]], [test_sample_num])
+    data4 = np.random.multivariate_normal([7, 8], [[2, 2], [1, 3]], [test_sample_num])
     pickle.dump(
         {
             "train_set": np.vstack([data1, data2]),

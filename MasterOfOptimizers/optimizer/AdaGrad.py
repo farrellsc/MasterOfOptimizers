@@ -4,7 +4,7 @@ import numpy as np
 
 
 class AdaGrad(BaseOptimizer):
-    def __init__(self, lr=0.01, epsilon=1e-8):
+    def __init__(self, lr=0.1, epsilon=1e-8):
         self.lr = lr
         self.epsilon = epsilon
         self.Gt = None
