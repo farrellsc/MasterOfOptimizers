@@ -33,5 +33,3 @@ class ADAM(BaseOptimizer):
         self.beta_2_t *= self.beta_2
 
         return (self.lr / (np.sqrt(corrected_v) + self.eps)) * corrected_m
-
-# test TODO

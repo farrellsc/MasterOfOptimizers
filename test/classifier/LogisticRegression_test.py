@@ -3,6 +3,7 @@ from MasterOfOptimizers.util.BaseTestCase import BaseTestCase
 from MasterOfOptimizers.optimizer.MiniBatchGD import MiniBatchGD
 from MasterOfOptimizers.dataloader.BaseDataloader import BaseDataloader
 from MasterOfOptimizers.optimizer.AdaDelta import AdaDelta
+from MasterOfOptimizers.optimizer.ADAM import ADAM
 
 
 class TestLinearRegression(BaseTestCase):
@@ -20,7 +21,7 @@ class TestLinearRegression(BaseTestCase):
         #     num_iter=1000
         # )
         self.model = LogisticRegression(
-            optimizer=AdaDelta(),
+            optimizer=ADAM(),
             num_iter=1000
         )
 
