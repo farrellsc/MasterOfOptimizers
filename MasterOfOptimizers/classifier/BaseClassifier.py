@@ -1,6 +1,6 @@
 class BaseClassifier:
     def __init__(self):
-        raise NotImplementedError
+        pass
 
     def train(self, dataloader):
         raise NotImplementedError

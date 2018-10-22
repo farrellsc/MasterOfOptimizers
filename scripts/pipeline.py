@@ -1,4 +1,4 @@
-from MasterOfOptimizers.classifier.LinearRegression import LinearRegression
+from MasterOfOptimizers.classifier.LogisticRegression import LogisticRegression
 from MasterOfOptimizers.optimizer.MiniBatchGD import MiniBatchGD
 from MasterOfOptimizers.dataloader.BaseDataloader import BaseDataloader
 
@@ -11,7 +11,7 @@ def main():
     optimizer = MiniBatchGD(
         batch_size=1
     )
-    model = LinearRegression(
+    model = LogisticRegression(
         optimizer=optimizer
     )
     model.train(trainDataloader)

@@ -6,6 +6,7 @@ class BaseDataloader:
         self.data, self.label = self.load_file(file_path)
         self.batch_size = batch_size
         self.sample_num = self.data.shape[0]
+        self.sample_dim = self.data.shape[1]
         assert self.sample_num % self.batch_size == 0, "batch size should be divisible by sample_num"
         self.batch_num = self.sample_num // self.batch_size
 
@@ -18,3 +19,5 @@ class BaseDataloader:
         for i in range(self.batch_num):
             yield self.data[i*self.batch_size : (i+1)*self.batch_size, :], \
                   self.label[i*self.batch_size : (i+1)*self.batch_size, :]
+            if i == self.batch_num-1:
+                i = 0
