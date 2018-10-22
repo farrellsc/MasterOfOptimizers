@@ -1,5 +1,9 @@
 class BaseOptimizer:
-    def __init__(self, batch_size: int, verbose=0):
-        self.batch_size = batch_size
-        self.verbose = verbose
+    def __init__(self, **kwargs):
+        raise NotImplementedError
+
+    def step(self, gradient):
+        """
+        returns update value on gradient
+        """
         raise NotImplementedError

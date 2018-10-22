@@ -1,7 +1,12 @@
-from MasterOfOptimizers.optimizer.AdaGrad import AdaGrad
+from MasterOfOptimizers.optimizer.BaseOptimizer import BaseOptimizer
+from overrides import overrides
 
 
-class ADAM(AdaGrad):
-    def __init__(self, batch_size: int, lr=0.001, betas=(0.9, 0.999), eps=1e-08, weight_decay=0):
-        super(ADAM, self).__init__(batch_size)
+class ADAM(BaseOptimizer):
+    def __init__(self, lr=0.001, betas=(0.9, 0.999), eps=1e-08, weight_decay=0):
         raise NotImplementedError
+
+    @overrides
+    def step(self, gradient):
+        raise NotImplementedError
+
