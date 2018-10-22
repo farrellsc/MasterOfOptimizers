@@ -11,10 +11,12 @@ class TestLinearRegression(BaseTestCase):
             batch_size=5
         )
         self.model = LogisticRegression(
-            optimizer=None,
-            num_iter=1
+            optimizer=MiniBatchGD(lr=0.1, momentum=0),
+            num_iter=1000
         )
 
     def test_training(self):
         self.model.train(self.trainDataloader)
-        self.model.plot(self.trainDataloader, "testcase")
+        self.model.plot(
+            self.trainDataloader,
+            "/media/zzhuang/00091EA2000FB1D0/iGit/git_projects/MasterOfOptimizers/plots/testcase_boundary.png")
