@@ -11,9 +11,9 @@ import matplotlib.pyplot as plt
 def main():
     trainDataloader = BaseDataloader(
         file_path="/media/zzhuang/00091EA2000FB1D0/iGit/git_projects/MasterOfOptimizers/data/fake1",
-        batch_size=100
+        batch_size=10
     )
-    iters = 100
+    iters = 2000
 
     minibatch_model = LogisticRegression(
         optimizer=MiniBatchGD(lr=0.1, momentum=0),

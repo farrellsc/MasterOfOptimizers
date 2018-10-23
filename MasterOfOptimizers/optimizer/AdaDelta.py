@@ -4,7 +4,7 @@ import numpy as np
 
 
 class AdaDelta(BaseOptimizer):
-    def __init__(self, eps=1e-08, gamma = 0.9):
+    def __init__(self, eps=1e-08, gamma=0.9):
         self.sqr_g_avg = None
         self.eps = eps
         self.gamma = gamma

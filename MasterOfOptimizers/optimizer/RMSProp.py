@@ -6,7 +6,7 @@ from overrides import overrides
 
 
 class RMSProp(BaseOptimizer):
-    def __init__(self, lr=0.001, eps=1e-08, gamma = 0.9):
+    def __init__(self, lr=0.1, eps=1e-08, gamma=0.9):
         self.lr = lr
         self.sqr_g = None
         self.eps = eps
