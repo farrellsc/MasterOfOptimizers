@@ -31,9 +31,9 @@ def main():
         num_iter=iters
     )
     fullbatch_model.train(fullTrainDataloader)
-    fullbatch_model.plot(
-        fullTrainDataloader,
-        "/media/zzhuang/00091EA2000FB1D0/iGit/git_projects/MasterOfOptimizers/plots/fullbatch_testcase_boundary.png")
+    # fullbatch_model.plot(
+    #     fullTrainDataloader,
+    #     "/media/zzhuang/00091EA2000FB1D0/iGit/git_projects/MasterOfOptimizers/plots/fullbatch_testcase_boundary.png")
 
     # --------------------------------------------------------------------------------------------------------
     print("stochastic batch gradient descent")
@@ -42,9 +42,9 @@ def main():
         num_iter=iters
     )
     stochastic_model.train(stochasticTrainDataloader)
-    stochastic_model.plot(
-        stochasticTrainDataloader,
-        "/media/zzhuang/00091EA2000FB1D0/iGit/git_projects/MasterOfOptimizers/plots/stochastic_testcase_boundary.png")
+    # stochastic_model.plot(
+    #     stochasticTrainDataloader,
+    #     "/media/zzhuang/00091EA2000FB1D0/iGit/git_projects/MasterOfOptimizers/plots/stochastic_testcase_boundary.png")
 
     # --------------------------------------------------------------------------------------------------------
     print("mini batch gradient descent")
@@ -53,9 +53,9 @@ def main():
         num_iter=iters
     )
     minibatch_model.train(trainDataloader)
-    minibatch_model.plot(
-        trainDataloader,
-        "/media/zzhuang/00091EA2000FB1D0/iGit/git_projects/MasterOfOptimizers/plots/minibatch_testcase_boundary.png")
+    # minibatch_model.plot(
+    #     trainDataloader,
+    #     "/media/zzhuang/00091EA2000FB1D0/iGit/git_projects/MasterOfOptimizers/plots/minibatch_testcase_boundary.png")
 
     # --------------------------------------------------------------------------------------------------------
     print("mini batch gradient descent with momentum")
@@ -64,9 +64,9 @@ def main():
         num_iter=iters
     )
     momentum_model.train(trainDataloader)
-    momentum_model.plot(
-        trainDataloader,
-        "/media/zzhuang/00091EA2000FB1D0/iGit/git_projects/MasterOfOptimizers/plots/momentum_testcase_boundary.png")
+    # momentum_model.plot(
+    #     trainDataloader,
+    #     "/media/zzhuang/00091EA2000FB1D0/iGit/git_projects/MasterOfOptimizers/plots/momentum_testcase_boundary.png")
 
     # --------------------------------------------------------------------------------------------------------
     print("adagrad")
@@ -75,9 +75,9 @@ def main():
         num_iter=iters
     )
     adagrad_model.train(trainDataloader)
-    adagrad_model.plot(
-        trainDataloader,
-        "/media/zzhuang/00091EA2000FB1D0/iGit/git_projects/MasterOfOptimizers/plots/adagrad_testcase_boundary.png")
+    # adagrad_model.plot(
+    #     trainDataloader,
+    #     "/media/zzhuang/00091EA2000FB1D0/iGit/git_projects/MasterOfOptimizers/plots/adagrad_testcase_boundary.png")
 
     # --------------------------------------------------------------------------------------------------------
     print("adadelta")
@@ -86,9 +86,9 @@ def main():
         num_iter=iters
     )
     adadelta_model.train(trainDataloader)
-    adadelta_model.plot(
-        trainDataloader,
-        "/media/zzhuang/00091EA2000FB1D0/iGit/git_projects/MasterOfOptimizers/plots/adadelta_testcase_boundary.png")
+    # adadelta_model.plot(
+    #     trainDataloader,
+    #     "/media/zzhuang/00091EA2000FB1D0/iGit/git_projects/MasterOfOptimizers/plots/adadelta_testcase_boundary.png")
 
     # --------------------------------------------------------------------------------------------------------
     print("rmsprop")
@@ -97,9 +97,9 @@ def main():
         num_iter=iters
     )
     rmsprop_model.train(trainDataloader)
-    rmsprop_model.plot(
-        trainDataloader,
-        "/media/zzhuang/00091EA2000FB1D0/iGit/git_projects/MasterOfOptimizers/plots/rmsprop_testcase_boundary.png")
+    # rmsprop_model.plot(
+    #     trainDataloader,
+    #     "/media/zzhuang/00091EA2000FB1D0/iGit/git_projects/MasterOfOptimizers/plots/rmsprop_testcase_boundary.png")
 
     # --------------------------------------------------------------------------------------------------------
     print("adam")
@@ -108,9 +108,9 @@ def main():
         num_iter=iters
     )
     adam_model.train(trainDataloader)
-    adam_model.plot(
-        trainDataloader,
-        "/media/zzhuang/00091EA2000FB1D0/iGit/git_projects/MasterOfOptimizers/plots/adam_testcase_boundary.png")
+    # adam_model.plot(
+    #     trainDataloader,
+    #     "/media/zzhuang/00091EA2000FB1D0/iGit/git_projects/MasterOfOptimizers/plots/adam_testcase_boundary.png")
 
     # --------------------------------------------------------------------------------------------------------
     xs = [i+1 for i in range(iters)]
@@ -122,6 +122,7 @@ def main():
     plt.plot(xs, adadelta_model.get_loss_history())
     plt.plot(xs, rmsprop_model.get_loss_history())
     plt.plot(xs, adam_model.get_loss_history())
+    plt.xlim(xmin=0)
     plt.ylim(ymin=0)
     plt.title("Optimizer Comparison")
     plt.xlabel("epoch")
