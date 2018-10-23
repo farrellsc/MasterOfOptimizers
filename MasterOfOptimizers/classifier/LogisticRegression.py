@@ -15,10 +15,7 @@ class LogisticRegression(BaseClassifier):
         self.verbose = verbose
         self.W = None
         self.plt_path = "/".join(__file__.split("/")[:-3]) + "/plot/"
-<<<<<<< HEAD
-=======
         self.loss_history = []
->>>>>>> 0e2ad632450092a566aaf6d6ad095f182d9faaac
 
     @overrides
     def train(self, dataloader):
@@ -26,14 +23,7 @@ class LogisticRegression(BaseClassifier):
         for i in range(self.num_iter):
             if i % 10 == 0:
                 print("iter %d" % i)
-<<<<<<< HEAD
-            for batch_ind, (X, y) in enumerate(dataloader):
-                X = np.concatenate((np.ones([X.shape[0], 1]), X), axis=1)
-                pred = sigmoid(np.dot(X, self.W)).reshape(y.shape)
-                gradient = np.dot(X.T, pred - y) / y.size
 
-                self.W -= self.optimizer.step(gradient)
-=======
             preds = None
             ys = None
             for batch_ind, (X, y) in enumerate(dataloader):
@@ -48,7 +38,6 @@ class LogisticRegression(BaseClassifier):
                 else:
                     ys = np.vstack([ys, y])
                 gradient = np.dot(X.T, pred - y) / y.size
->>>>>>> 0e2ad632450092a566aaf6d6ad095f182d9faaac
 
                 self.W -= self.optimizer.step(gradient)
             self.loss_history.append(cross_entropy(preds, ys))
@@ -64,11 +53,8 @@ class LogisticRegression(BaseClassifier):
         plt.plot(x, y)
         data1 = dataloader.data[dataloader.label[:, 0] == 0]
         data2 = dataloader.data[dataloader.label[:, 0] == 1]
-<<<<<<< HEAD
-=======
         plt.ylim(int(min(data1[:, 0].min(), data2[:, 0].min()))-1, int(max(data1[:, 0].max(), data2[:, 0].max()))+1)
         plt.ylim(int(min(data1[:, 1].min(), data2[:, 1].min()))-1, int(max(data1[:, 1].max(), data2[:, 1].max()))+1)
->>>>>>> 0e2ad632450092a566aaf6d6ad095f182d9faaac
         plt.scatter(data1[:, 0], data1[:, 1], color='r')
         plt.scatter(data2[:, 0], data2[:, 1], color='b')
         plt.savefig(plt_path)
