@@ -1,6 +1,7 @@
 from MasterOfOptimizers.classifier.BaseClassifier import BaseClassifier
 from MasterOfOptimizers.optimizer.BaseOptimizer import BaseOptimizer
-from MasterOfOptimizers.util.func import sigmoid, cross_entropy
+from MasterOfOptimizers.util.func import sigmoid, cross_entropy, mse
+from tqdm import tqdm
 from overrides import overrides
 import matplotlib.pyplot as plt
 import numpy as np
@@ -20,10 +21,7 @@ class LogisticRegression(BaseClassifier):
     @overrides
     def train(self, dataloader):
         self.W = np.zeros(dataloader.sample_dim + 1).reshape([-1, 1])
-        for i in range(self.num_iter):
-            if i % 10 == 0:
-                print("iter %d" % i)
-
+        for i in tqdm(range(self.num_iter)):
             preds = None
             ys = None
             for batch_ind, (X, y) in enumerate(dataloader):
@@ -40,7 +38,7 @@ class LogisticRegression(BaseClassifier):
                 gradient = np.dot(X.T, pred - y) / y.size
 
                 self.W -= self.optimizer.step(gradient)
-            self.loss_history.append(cross_entropy(preds, ys))
+            self.loss_history.append(mse(preds, ys))
 
     @overrides
     def get_loss_history(self):
@@ -48,7 +46,6 @@ class LogisticRegression(BaseClassifier):
 
     def plot(self, dataloader, plt_path):
         x = np.linspace(dataloader.data[:, 0].min(), dataloader.data[:, 0].max(), 50)
-        print(self.W)
         y = -(self.W[0] + self.W[1] * x) / self.W[2]
         plt.plot(x, y)
         data1 = dataloader.data[dataloader.label[:, 0] == 0]
