@@ -19,4 +19,6 @@ class MiniBatchGD(BaseOptimizer):
     def step(self, gradient):
         if self.last_grad is None:
             self.last_grad = np.zeros(gradient.shape)
-        return self.momentum*self.last_grad + self.lr * gradient
+        res = self.momentum*self.last_grad + self.lr * gradient
+        self.last_grad = gradient
+        return res
