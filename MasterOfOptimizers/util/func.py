@@ -11,3 +11,7 @@ def cross_entropy(pred, y):
 
 def mse(pred, y):
     return ((pred - y) ** 2).mean()
+
+
+def mse_gradient(X, pred, y):
+    return np.dot(X.T, pred - y) / y.size

@@ -1,6 +1,6 @@
 from MasterOfOptimizers.classifier.BaseClassifier import BaseClassifier
 from MasterOfOptimizers.optimizer.BaseOptimizer import BaseOptimizer
-from MasterOfOptimizers.util.func import sigmoid, cross_entropy, mse
+from MasterOfOptimizers.util.func import sigmoid, cross_entropy, mse, mse_gradient
 from tqdm import tqdm
 from overrides import overrides
 import matplotlib.pyplot as plt
@@ -9,6 +9,7 @@ import numpy as np
 
 class LogisticRegression(BaseClassifier):
     def __init__(self, optimizer: BaseOptimizer, num_iter, verbose=False, lr=0.01):
+        super(LogisticRegression, self).__init__()
         self.optimizer = optimizer
         self.loss = None
         self.num_iter = num_iter
@@ -35,7 +36,7 @@ class LogisticRegression(BaseClassifier):
                     ys = y.copy()
                 else:
                     ys = np.vstack([ys, y])
-                gradient = np.dot(X.T, pred - y) / y.size
+                gradient = mse_gradient(X, pred, y)
 
                 self.W -= self.optimizer.step(gradient)
             self.loss_history.append(mse(preds, ys))

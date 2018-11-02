@@ -27,7 +27,7 @@ def main():
     # --------------------------------------------------------------------------------------------------------
     print("full batch gradient descent")
     fullbatch_model = LogisticRegression(
-        optimizer=MiniBatchGD(lr=0.1, momentum=0),
+        optimizer=MiniBatchGD(lr=0.000008, momentum=0),
         num_iter=iters
     )
     fullbatch_model.train(fullTrainDataloader)
@@ -71,7 +71,9 @@ def main():
     # --------------------------------------------------------------------------------------------------------
     print("adagrad")
     adagrad_model = LogisticRegression(
-        optimizer=AdaGrad(),
+        optimizer=AdaGrad(
+            lr=0.1
+        ),
         num_iter=iters
     )
     adagrad_model.train(trainDataloader)
@@ -93,7 +95,9 @@ def main():
     # --------------------------------------------------------------------------------------------------------
     print("rmsprop")
     rmsprop_model = LogisticRegression(
-        optimizer=RMSProp(),
+        optimizer=RMSProp(
+            lr=0.1
+        ),
         num_iter=iters
     )
     rmsprop_model.train(trainDataloader)
@@ -104,7 +108,9 @@ def main():
     # --------------------------------------------------------------------------------------------------------
     print("adam")
     adam_model = LogisticRegression(
-        optimizer=ADAM(),
+        optimizer=ADAM(
+            lr=0.1
+        ),
         num_iter=iters
     )
     adam_model.train(trainDataloader)
@@ -123,7 +129,7 @@ def main():
     plt.plot(xs, rmsprop_model.get_loss_history())
     plt.plot(xs, adam_model.get_loss_history())
     plt.xlim(xmin=0)
-    plt.ylim(ymin=0)
+    plt.ylim(ymin=0, ymax=0.6)
     plt.title("Optimizer Comparison")
     plt.xlabel("epoch")
     plt.ylabel("training loss")

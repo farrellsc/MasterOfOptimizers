@@ -23,7 +23,7 @@ class BaseDataloader:
         return data['train_set'], data['train_label']
 
     def __iter__(self):
-        for i in range(self.batch_num):
+        for i in range(0, self.batch_num):
             yield self.data[i*self.batch_size : (i+1)*self.batch_size, :], \
                   self.label[i*self.batch_size : (i+1)*self.batch_size, :]
             if i == self.batch_num-1:
