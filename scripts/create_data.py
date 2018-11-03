@@ -39,8 +39,8 @@ def main():
         {
             "train_set": np.vstack([data1, data2]),
             "test_set": np.vstack([data3, data4]),
-            "train_label": np.vstack([np.zeros([train_sample_num, 1]), np.ones([train_sample_num, 1])]),
-            "test_label": np.vstack([np.zeros([test_sample_num, 1]), np.ones([test_sample_num, 1])])
+            "train_label": np.vstack([np.zeros([int(train_sample_num * label_ratio), 1]), np.ones([train_sample_num, 1])]),
+            "test_label": np.vstack([np.zeros([int(test_sample_num * label_ratio), 1]), np.ones([test_sample_num, 1])])
         },
         open('../data/' + data_name, 'wb')
     )
