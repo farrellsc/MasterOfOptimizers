@@ -21,7 +21,7 @@ def main():
     dim = np.shape(test_set)[1]
 
     # Sparsity filtering
-    sparsity_filter = scipy.random.randn(dim) / 3 + 0.8
+    sparsity_filter = scipy.random.randn(dim) / 3 + 0.6
     print("sparsity_filter:", sparsity_filter)
 
     train_set = sparsify_data(train_set, sparsity_filter)

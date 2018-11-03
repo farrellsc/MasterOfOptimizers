@@ -1,5 +1,5 @@
 import numpy as np
-from scipy import random, linalg
+from scipy import sparse, random, linalg
 import matplotlib.pyplot as plt
 import pickle
 
@@ -23,17 +23,18 @@ def main():
     dim = 20
     mean_pos = random.rand(dim) * 10 - 5
     mean_neg = random.rand(dim) * 10 - 5
-    temp = random.rand(dim, dim)
+    temp = random.rand(dim, dim) * 2
     var_pos = np.dot(temp, temp.transpose())
-    temp = random.rand(dim, dim)
+    temp = random.rand(dim, dim) * 2
     var_neg = np.dot(temp, temp.transpose())
     
+    var_noise = random.rand(dim, dim) * 1.5
+    var_noise = np.dot(var_noise, var_noise.transpose())
     
-    
-    data1 = np.random.multivariate_normal(mean_pos, var_pos, [int(train_sample_num * label_ratio)])
-    data2 = np.random.multivariate_normal(mean_neg, var_neg, [train_sample_num])
-    data3 = np.random.multivariate_normal(mean_pos, var_pos, [int(test_sample_num * label_ratio)])
-    data4 = np.random.multivariate_normal(mean_neg, var_neg, [test_sample_num])
+    data1 = np.random.multivariate_normal(mean_neg, var_neg, [int(train_sample_num * label_ratio)]) + np.random.multivariate_normal(np.zeros(dim), var_noise, [int(train_sample_num * label_ratio)]) 
+    data2 = np.random.multivariate_normal(mean_pos, var_pos, [train_sample_num]) + np.random.multivariate_normal(np.zeros(dim), var_noise, [train_sample_num]) 
+    data3 = np.random.multivariate_normal(mean_neg, var_neg, [int(test_sample_num * label_ratio)]) + np.random.multivariate_normal(np.zeros(dim), var_noise, [int(test_sample_num * label_ratio)]) 
+    data4 = np.random.multivariate_normal(mean_pos, var_pos, [test_sample_num]) + np.random.multivariate_normal(np.zeros(dim), var_noise, [test_sample_num]) 
     #print(data3, data4)
     pickle.dump(
         {
